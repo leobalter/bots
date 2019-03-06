@@ -14,3 +14,5 @@ start ------ 123 42 end
 bar
 
 baz`);
+
+process.exit(1);
