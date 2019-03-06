@@ -8,7 +8,8 @@ notifications:
   webhooks: https://www.travisbuddy.com/
 travisBuddy:
   templates:
-    success: travis-buddy-success-template.md
+    failure: ./travis-buddy-failure-template.md
+    error: ./travis-buddy-error-template.md
   regex: "(foo.*bar)"
   insertMode: update
   successBuildLog: true
