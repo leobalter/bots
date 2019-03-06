@@ -1,0 +1,14 @@
+matrix:
+  include:
+  - language: node_js
+    name: Meep
+    node_js: node
+    script: "./scripts/ci.js"
+notifications:
+  webhooks: https://www.travisbuddy.com/
+travisBuddy:
+  templates:
+    success: travis-buddy-success-template.md
+  regex: "(foo.*bar)"
+  insertMode: update
+  successBuildLog: true
