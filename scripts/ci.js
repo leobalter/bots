@@ -1,4 +1,7 @@
-console.log(`foo
+console.log(`
+
+000
+foo
 
 start ------ 123 42 end
 
