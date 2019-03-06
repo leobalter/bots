@@ -10,6 +10,7 @@ travisBuddy:
   templates:
     failure: ./travis-buddy-failure-template.md
     error: ./travis-buddy-error-template.md
-  regex: "(foo.*bar)"
+    success: ./travis-buddy-success-template.md
+  regex: "(start.*end)"
   insertMode: update
   successBuildLog: true
