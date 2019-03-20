@@ -57,3 +57,6 @@ workflows:
     jobs:
       - build
       - otherBuild
+  this_can_fail:
+    jobs:
+      - otherBuild
