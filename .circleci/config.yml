@@ -37,12 +37,13 @@ jobs:
     environment:
       hostType: d8
       hostPath: ~/.jsvu/v8
+      jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
       - *restore_cache
       - run: npm install
       - *save_cache
-      - run: jsvu --os=linux64 --engines=v8
+      - run: $jsvu --os=linux64 --engines=v8
       - run: npm test
   test_v8_harmony:
     docker:
@@ -52,12 +53,13 @@ jobs:
       hostType: d8
       hostPath: ~/.jsvu/v8
       hostArgs: --harmony
+      jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
       - *restore_cache
       - run: npm install
       - *save_cache
-      - run: jsvu --os=linux64 --engines=v8
+      - run: $jsvu --os=linux64 --engines=v8
       - run: npm test
   test_spidermonkey:
     docker:
@@ -66,12 +68,13 @@ jobs:
     environment:
       hostType: jsshell
       hostPath: ~/.jsvu/spidermonkey
+      jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
       - *restore_cache
       - run: npm install
       - *save_cache
-      - run: jsvu --os=linux64 --engines=spidermonkey
+      - run: $jsvu --os=linux64 --engines=spidermonkey
       - run: npm test
   test_chakra:
     docker:
@@ -80,12 +83,13 @@ jobs:
     environment:
       hostType: ch
       hostPath: ~/.jsvu/chakra
+      jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
       - *restore_cache
       - run: npm install
       - *save_cache
-      - run: jsvu --os=linux64 --engines=chakra
+      - run: $jsvu --os=linux64 --engines=chakra
       - run: npm test
   test_jsc:
     docker:
@@ -94,12 +98,13 @@ jobs:
     environment:
       hostType: jsc
       hostPath: ~/.jsvu/jsc
+      jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
       - *restore_cache
       - run: npm install
       - *save_cache
-      - run: jsvu --os=linux64 --engines=jsc
+      - run: $jsvu --os=linux64 --engines=jsc
       - run: npm test
   test_node_lts:
     docker:
