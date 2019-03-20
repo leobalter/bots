@@ -45,6 +45,8 @@ jobs:
       - run: echo $CIRCLE_BRANCH
       - run: git remote -v
       - run: git branch
+      - run: git diff $CIRCLE_BRANCH master
+      - run: git diff $CIRCLE_BRANCH...master
 workflows:
   version: 2
   tests:
