@@ -40,13 +40,10 @@ jobs:
       jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
-      - run: git diff master
+      - run: git checkout master
       - run: git diff $CIRCLE_BRANCH
-      - run: echo $CIRCLE_BRANCH
-      - run: git remote -v
-      - run: git branch
-      - run: git diff-tree --no-commit-id --name-only -r HEAD | cut -d/ -f 7`
-      - run: git diff-tree --no-commit-id --name-only -r `echo ${CIRCLE_COMPARE_URL} | cut -d/ -f 7`
+      - run: git checkout $CIRCLE_BRANCH
+      - run: git diff master
 
 workflows:
   version: 2
