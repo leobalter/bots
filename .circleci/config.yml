@@ -40,8 +40,7 @@ jobs:
       jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
-      - run: git checkout master
-      - run: git diff --name-only origin/master
+      - run: npm install
       - run: ./node_modules/.bin/jsvu --os=linux64 --engines=v8
       - run: ~/.jsvu/v8
 
