@@ -27,7 +27,7 @@ save_cache: &save_cache
     key: *js_deps_cache_key
 
 jobs:
-  test_v8:
+  "tests for v8":
     docker:
       - image: *node_latest
       # Specify service dependencies here if necessary
@@ -45,7 +45,7 @@ jobs:
       - *save_cache
       - run: $jsvu --os=linux64 --engines=v8
       - run: npm test
-  test_v8_harmony:
+  "tests for v8_harmony":
     docker:
       - image: *node_latest
     working_directory: ~/bots
@@ -61,7 +61,7 @@ jobs:
       - *save_cache
       - run: $jsvu --os=linux64 --engines=v8
       - run: npm test
-  test_spidermonkey:
+  "tests for spidermonkey":
     docker:
       - image: *node_latest
     working_directory: ~/bots
@@ -76,7 +76,7 @@ jobs:
       - *save_cache
       - run: $jsvu --os=linux64 --engines=spidermonkey
       - run: npm test
-  test_chakra:
+  "tests for chakra":
     docker:
       - image: *node_latest
     working_directory: ~/bots
@@ -91,7 +91,7 @@ jobs:
       - *save_cache
       - run: $jsvu --os=linux64 --engines=chakra
       - run: npm test
-  test_jsc:
+  "tests for jsc":
     docker:
       - image: *node_latest
     working_directory: ~/bots
@@ -106,7 +106,7 @@ jobs:
       - *save_cache
       - run: $jsvu --os=linux64 --engines=jsc
       - run: npm test
-  test_node_lts:
+  "tests for node_lts":
     docker:
       - image: *node_lts
     working_directory: ~/bots
@@ -119,7 +119,7 @@ jobs:
       - run: npm install
       - *save_cache
       - run: npm test
-  test_node_latest:
+  "tests for node_latest":
     docker:
       - image: *node_latest
     working_directory: ~/bots
@@ -136,22 +136,22 @@ workflows:
   version: 2
   test_chakra:
     jobs:
-      - test_chakra
+      - "tests for chakra"
   test_jsc:
     jobs:
-      - test_jsc
+      - "tests for jsc"
   test_spidermonkey:
     jobs:
-      - test_spidermonkey
+      - "tests for spidermonkey"
   test_v8:
     jobs:
-      - test_v8
+      - "tests for v8"
   test_v8_harmony:
     jobs:
-      - test_v8_harmony
+      - "tests for v8_harmony"
   test_node_lts:
     jobs:
-      - test_node_lts
+      - "tests for node_lts"
   test_node_latest:
     jobs:
-      - test_node_latest
+      - "tests for node_latest"
