@@ -3,4 +3,4 @@ matrix:
   - language: node_js
     name: Meep
     node_js: node
-    script: "./scripts/ci.js"
+    script: "node ./scripts/ci.js"
