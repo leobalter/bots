@@ -41,8 +41,10 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: ./node_modules/.bin/jsvu --os=linux64 --engines=v8
-      - run: which ~/.jsvu/v8
+      - run: ./node_modules/.bin/jsvu --os=linux64 --engines=all
+      - run: ~/.jsvu/v8 --help
+      - run: ~/.jsvu/jsc --help
+      - run: ~/.jsvu/spidermonkey --help
 
 workflows:
   version: 2
