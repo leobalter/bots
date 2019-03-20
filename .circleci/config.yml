@@ -36,15 +36,13 @@ jobs:
     working_directory: ~/bots
     environment:
       hostType: d8
-      hostPath: v8
+      hostPath: ~/.jsvu/engines/v8/v8
       jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
       - run: npm install
       - run: ./node_modules/.bin/jsvu --os=linux64 --engines=v8
-      - run: export PATH="${HOME}/.jsvu:${PATH}"
-      - run: ~/.jsvu/v8 --help
-      - run: ./node_modules/.bin/test262-harness --hostPath=v8 --hostType=d8 -- 'test/**/*'
+      - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=d8 -- 'test/**/*'
 workflows:
   version: 2
   tests:
