@@ -26,12 +26,6 @@ save_cache: &save_cache
       - node_modules
     key: *js_deps_cache_key
 
-presteps: &presteps
-  - checkout
-  - *restore_cache
-  - run: npm install
-  - *save_cache
-
 jobs:
   test_v8:
     docker:
@@ -44,7 +38,10 @@ jobs:
       hostType: d8
       hostPath: ~/.jsvu/v8
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: jsvu --os=linux64 --engines=v8
       - run: npm test
   test_v8_harmony:
@@ -56,7 +53,10 @@ jobs:
       hostPath: ~/.jsvu/v8
       hostArgs: --harmony
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: jsvu --os=linux64 --engines=v8
       - run: npm test
   test_spidermonkey:
@@ -67,7 +67,10 @@ jobs:
       hostType: jsshell
       hostPath: ~/.jsvu/spidermonkey
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: jsvu --os=linux64 --engines=spidermonkey
       - run: npm test
   test_chakra:
@@ -78,7 +81,10 @@ jobs:
       hostType: ch
       hostPath: ~/.jsvu/chakra
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: jsvu --os=linux64 --engines=chakra
       - run: npm test
   test_jsc:
@@ -89,7 +95,10 @@ jobs:
       hostType: jsc
       hostPath: ~/.jsvu/jsc
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: jsvu --os=linux64 --engines=jsc
       - run: npm test
   test_node_lts:
@@ -100,7 +109,10 @@ jobs:
       hostType: node
       hostPath: node
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: npm test
   test_node_latest:
     docker:
@@ -110,7 +122,10 @@ jobs:
       hostType: node
       hostPath: node
     steps:
-      - *presteps
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
       - run: npm test
 workflows:
   version: 2
