@@ -42,7 +42,7 @@ jobs:
       - checkout
       - run: npm install
       - run: ./node_modules/.bin/jsvu --os=linux64 --engines=v8
-      - run: ~/.jsvu/v8
+      - run: which ~/.jsvu/v8
 
 workflows:
   version: 2
