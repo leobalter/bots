@@ -41,11 +41,9 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: ./node_modules/.bin/jsvu --os=linux64 --engines=all
+      - run: ./node_modules/.bin/jsvu --os=linux64 --engines=v8
       - run: ~/.jsvu/v8 --help
-      - run: ~/.jsvu/jsc --help
-      - run: ~/.jsvu/spidermonkey --help
-
+      - run: ./node_modules/.bin/test262-harness --hostPath=~/.jsvu/v8 --hostType=d8 -- 'test/**/*'
 workflows:
   version: 2
   tests:
