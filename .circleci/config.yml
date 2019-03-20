@@ -49,7 +49,7 @@ jobs:
       hostType: d8
       hostPath: ~/.jsvu/v8
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: jsvu --os=linux64 --engines=v8
       - run: npm test
   test_v8_harmony:
@@ -61,7 +61,7 @@ jobs:
       hostPath: ~/.jsvu/v8
       hostArgs: --harmony
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: jsvu --os=linux64 --engines=v8
       - run: npm test
   test_spidermonkey:
@@ -72,7 +72,7 @@ jobs:
       hostType: jsshell
       hostPath: ~/.jsvu/spidermonkey
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: jsvu --os=linux64 --engines=spidermonkey
       - run: npm test
   test_chakra:
@@ -83,7 +83,7 @@ jobs:
       hostType: ch
       hostPath: ~/.jsvu/chakra
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: jsvu --os=linux64 --engines=chakra
       - run: npm test
   test_jsc:
@@ -94,7 +94,7 @@ jobs:
       hostType: jsc
       hostPath: ~/.jsvu/jsc
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: jsvu --os=linux64 --engines=jsc
       - run: npm test
   test_node_lts:
@@ -105,7 +105,7 @@ jobs:
       hostType: node
       hostPath: node
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: npm test
   test_node_latest:
     docker:
@@ -115,7 +115,7 @@ jobs:
       hostType: node
       hostPath: node
     steps:
-      <<: *presteps
+      <<: [*presteps]
       - run: npm test
 workflows:
   version: 2
