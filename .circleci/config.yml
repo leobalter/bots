@@ -41,7 +41,7 @@ jobs:
     steps:
       - checkout
       - run: git checkout master
-      - run: git diff $CIRCLE_BRANCH
+      - run: git diff --name-only origin/master
       - run: git checkout $CIRCLE_BRANCH
       - run: git diff master
 
