@@ -34,9 +34,6 @@ presteps: &presteps
 
 settings: &settings
   working_directory: ~/bots
-  branches:
-    ignore:
-      - master
 
 jobs:
   test_v8:
