@@ -32,9 +32,6 @@ presteps: &presteps
   - run: npm install
   - *save_cache
 
-settings: &settings
-  working_directory: ~/bots
-
 jobs:
   test_v8:
     docker:
@@ -42,7 +39,7 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: d8
       hostPath: ~/.jsvu/v8
@@ -53,7 +50,7 @@ jobs:
   test_v8_harmony:
     docker:
       - image: *node_latest
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: d8
       hostPath: ~/.jsvu/v8
@@ -65,7 +62,7 @@ jobs:
   test_spidermonkey:
     docker:
       - image: *node_latest
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: jsshell
       hostPath: ~/.jsvu/spidermonkey
@@ -76,7 +73,7 @@ jobs:
   test_chakra:
     docker:
       - image: *node_latest
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: ch
       hostPath: ~/.jsvu/chakra
@@ -87,7 +84,7 @@ jobs:
   test_jsc:
     docker:
       - image: *node_latest
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: jsc
       hostPath: ~/.jsvu/jsc
@@ -98,7 +95,7 @@ jobs:
   test_node_lts:
     docker:
       - image: *node_lts
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: node
       hostPath: node
@@ -108,7 +105,7 @@ jobs:
   test_node_latest:
     docker:
       - image: *node_latest
-    <<: *settings
+    working_directory: ~/bots
     environment:
       hostType: node
       hostPath: node
