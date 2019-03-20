@@ -1,11 +1,6 @@
-console.log(`foo
+const { spawnSync } = require('child_process');
 
-start ------ 123 42 end
+const foo = spawnSync('v8', ['--version']);
+console.log(foo);
 
-123
-
-42
-
-bar
-
-baz`);
+console.log('done');
