@@ -35,7 +35,8 @@ presteps: &presteps
 settings: &settings
   working_directory: ~/bots
   branches:
-    ignore: master
+    ignore:
+      - master
 
 jobs:
   test_v8:
@@ -48,9 +49,8 @@ jobs:
     environment:
       hostType: d8
       hostPath: ~/.jsvu/v8
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: jsvu --os=linux64 --engines=v8
       - run: npm test
   test_v8_harmony:
@@ -61,9 +61,8 @@ jobs:
       hostType: d8
       hostPath: ~/.jsvu/v8
       hostArgs: --harmony
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: jsvu --os=linux64 --engines=v8
       - run: npm test
   test_spidermonkey:
@@ -73,9 +72,8 @@ jobs:
     environment:
       hostType: jsshell
       hostPath: ~/.jsvu/spidermonkey
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: jsvu --os=linux64 --engines=spidermonkey
       - run: npm test
   test_chakra:
@@ -85,9 +83,8 @@ jobs:
     environment:
       hostType: ch
       hostPath: ~/.jsvu/chakra
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: jsvu --os=linux64 --engines=chakra
       - run: npm test
   test_jsc:
@@ -97,9 +94,8 @@ jobs:
     environment:
       hostType: jsc
       hostPath: ~/.jsvu/jsc
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: jsvu --os=linux64 --engines=jsc
       - run: npm test
   test_node_lts:
@@ -109,9 +105,8 @@ jobs:
     environment:
       hostType: node
       hostPath: node
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: npm test
   test_node_latest:
     docker:
@@ -120,9 +115,8 @@ jobs:
     environment:
       hostType: node
       hostPath: node
-    pre-steps:
-      - *presteps
     steps:
+      - *presteps
       - run: npm test
 workflows:
   version: 2
