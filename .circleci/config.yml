@@ -40,9 +40,8 @@ jobs:
       jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
-      - *restore_cache
-      - run: npm install
-      - *save_cache
+      - run: git diff
+      - run: git diff master
       - run: git log
 workflows:
   version: 2
