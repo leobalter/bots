@@ -134,24 +134,12 @@ jobs:
       - run: npm test
 workflows:
   version: 2
-  test_chakra:
+  tests:
     jobs:
       - "tests for chakra"
-  test_jsc:
-    jobs:
       - "tests for jsc"
-  test_spidermonkey:
-    jobs:
       - "tests for spidermonkey"
-  test_v8:
-    jobs:
       - "tests for v8"
-  test_v8_harmony:
-    jobs:
       - "tests for v8_harmony"
-  test_node_lts:
-    jobs:
       - "tests for node_lts"
-  test_node_latest:
-    jobs:
       - "tests for node_latest"
