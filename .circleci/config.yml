@@ -40,9 +40,9 @@ jobs:
       jsvu: ./node_modules/.bin/jsvu
     steps:
       - checkout
-      - run: git diff
       - run: git diff master
-      - run: git log
+      - run: git diff $CIRCLE_BRANCH
+      - run: echo $CIRCLE_BRANCH
 workflows:
   version: 2
   tests:
