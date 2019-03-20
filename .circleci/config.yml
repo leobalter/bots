@@ -23,6 +23,10 @@ defaults: &defaults
     - run: ls -lsa r/
     - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
 
+defaults2: &defaults2
+  steps:
+    - echo "something else"
+
 restore_cache: &restore_cache
   restore_cache:
     keys:
@@ -48,7 +52,7 @@ jobs:
       hostPath: r/v8
       hostName: v8
       jsvu: ./node_modules/.bin/jsvu
-    <<: [*defaults, *defaults]
+    <<: [*defaults, *defaults2]
 workflows:
   version: 2
   tests:
