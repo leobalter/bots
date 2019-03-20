@@ -13,13 +13,14 @@ references:
     circleci/node:11
   node_lts: &node_lts
     circleci/node:10
-  defaults: &defaults
-    steps:
-      - checkout
-      - run: npm install
-      - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
-      - run: cp -r  ~/.jsvu/engines/$hostName r
-      - run: ls -lsa r/
+
+defaults: &defaults
+  steps:
+    - checkout
+    - run: npm install
+    - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
+    - run: cp -r  ~/.jsvu/engines/$hostName r
+    - run: ls -lsa r/
 
 restore_cache: &restore_cache
   restore_cache:
@@ -46,7 +47,7 @@ jobs:
       hostPath: r/v8
       hostName: v8
       jsvu: ./node_modules/.bin/jsvu
-    <<: [*defaults]
+    <<: *defaults
     steps:
       - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=d8 -- 'test/**/*'
 workflows:
