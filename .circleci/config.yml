@@ -47,6 +47,7 @@ jobs:
       - run: git branch
       - run: git diff $CIRCLE_BRANCH master
       - run: git diff $CIRCLE_BRANCH...master
+      - run: echo $CIRCLE_COMPARE_URL
 workflows:
   version: 2
   tests:
