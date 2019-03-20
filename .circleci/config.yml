@@ -46,7 +46,7 @@ jobs:
       hostPath: r/v8
       hostName: v8
       jsvu: ./node_modules/.bin/jsvu
-    <<: *defaults
+    <<: [*defaults]
     steps:
       - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=d8 -- 'test/**/*'
 workflows:
