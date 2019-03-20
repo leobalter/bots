@@ -27,7 +27,7 @@ save_cache: &save_cache
     key: *js_deps_cache_key
 
 jobs:
-  "tests for v8":
+  "testing git":
     docker:
       - image: *node_latest
       # Specify service dependencies here if necessary
