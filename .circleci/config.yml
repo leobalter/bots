@@ -48,7 +48,7 @@ jobs:
       hostPath: r/v8
       hostName: v8
       jsvu: ./node_modules/.bin/jsvu
-    <<: [*defaults, foo: bar, *defaults, bar: baz]
+    <<: [*defaults, - foo: bar, *defaults, - bar: baz]
 workflows:
   version: 2
   tests:
