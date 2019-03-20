@@ -21,6 +21,7 @@ defaults: &defaults
     - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
     - run: cp -r  ~/.jsvu/engines/$hostName r
     - run: ls -lsa r/
+    - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
 
 restore_cache: &restore_cache
   restore_cache:
@@ -47,9 +48,7 @@ jobs:
       hostPath: r/v8
       hostName: v8
       jsvu: ./node_modules/.bin/jsvu
-    <<: *defaults
-    steps:
-      - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=d8 -- 'test/**/*'
+    <<: [*defaults]
 workflows:
   version: 2
   tests:
