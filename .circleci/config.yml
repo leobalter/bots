@@ -44,8 +44,6 @@ jobs:
       - run: git diff --name-only origin/master
       - run: git checkout $CIRCLE_BRANCH
       - run: git diff master
-      - run: v8 --help
-      - run: which v8
       - run: ~/.jsvu/v8
 
 workflows:
