@@ -45,8 +45,8 @@ jobs:
       - run: echo $CIRCLE_BRANCH
       - run: git remote -v
       - run: git branch
-      - run: git diff-tree --no-commit-id --name-only -r `echo ${CIRCLE_COMPARE_URL} | cut -d/ -f 7`
       - run: git diff-tree --no-commit-id --name-only -r HEAD | cut -d/ -f 7`
+      - run: git diff-tree --no-commit-id --name-only -r `echo ${CIRCLE_COMPARE_URL} | cut -d/ -f 7`
 
 workflows:
   version: 2
