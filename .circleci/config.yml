@@ -17,7 +17,7 @@ references:
 defaults: &defaults
   steps:
     - when:
-        condition: <<$CIRCLE_PULL_REQUEST>>
+        condition: $CIRCLE_PULL_REQUEST
         steps:
           - checkout
           - run: npm install
@@ -26,7 +26,7 @@ defaults: &defaults
           - run: ls -lsa r/
           - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
     - unless:
-        condition: <<$CIRCLE_PULL_REQUEST>>
+        condition: $CIRCLE_PULL_REQUEST
         steps:
           - run: echo $CIRCLE_PULL_REQUEST
 
