@@ -22,10 +22,7 @@ defaults: &defaults
     - run: cp -r  ~/.jsvu/engines/$hostName r
     - run: ls -lsa r/
     - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*' | tee exec_output.txt && grep '^[1-9][0-9]* failed$' exec_output.txt && exit 1
-
-defaults2: &defaults2
-  steps:
-    - echo "something else"
+    - run: echo $CIRCLE_PULL_REQUEST
 
 restore_cache: &restore_cache
   restore_cache:
@@ -52,7 +49,7 @@ jobs:
       hostPath: r/v8
       hostName: v8
       jsvu: ./node_modules/.bin/jsvu
-    <<: [*defaults, *defaults2]
+    <<: [*defaults]
 workflows:
   version: 2
   tests:
