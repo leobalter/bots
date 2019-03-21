@@ -21,7 +21,7 @@ defaults: &defaults
     - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
     - run: cp -r  ~/.jsvu/engines/$hostName r
     - run: ls -lsa r/
-    - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*' | tee exec_output.txt && grep -q '^[1-9][0-9]* failed$' exec_output.txt && exit 1
+    - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
     - run: echo $CIRCLE_PULL_REQUEST
 
 restore_cache: &restore_cache
