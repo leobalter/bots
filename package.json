@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/leobalter/bots/issues"
   },
-  "homepage": "https://github.com/leobalter/bots#readme"
+  "homepage": "https://github.com/leobalter/bots#readme",
+  "devDependencies": {
+    "jsvu": "^1.6.1",
+    "test262-harness": "^4.7.0"
+  }
 }

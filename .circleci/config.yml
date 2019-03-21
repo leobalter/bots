@@ -3,60 +3,55 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:11
 
+references:
+  js_deps_cache_key: &js_deps_cache_key
+    v1-dependency-js-deps-{{ checksum "package.json" }}
+  js_deps_backup_cache_key: &js_deps_backup_cache_key
+    v1-dependency-js-deps
+  node_latest: &node_latest
+    circleci/node:11
+  node_lts: &node_lts
+    circleci/node:10
+
+defaults: &defaults
+  steps:
+    - checkout
+    - run: npm install
+    - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
+    - run: cp -r  ~/.jsvu/engines/$hostName r
+    - run: ls -lsa r/
+    - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*' | tee exec_output.txt && grep '^[1-9][0-9]* failed$' exec_output.txt && exit 1
+    - run: echo $CIRCLE_PULL_REQUEST
+
+restore_cache: &restore_cache
+  restore_cache:
+    keys:
+      - *js_deps_cache_key
+      - *js_deps_backup_cache_key
+
+save_cache: &save_cache
+  save_cache:
+    paths:
+      - node_modules
+    key: *js_deps_cache_key
+
+jobs:
+  "testing git":
+    docker:
+      - image: *node_latest
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      - run: npm test
-  otherBuild:
-    docker:
-      - image: circleci/node:11
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: node ./scripts/ci.js
+    working_directory: ~/bots
+    environment:
+      hostType: d8
+      hostPath: r/v8
+      hostName: v8
+      jsvu: ./node_modules/.bin/jsvu
+    <<: [*defaults]
 workflows:
   version: 2
-  build_and_test:
+  tests:
     jobs:
-      - build
-      - otherBuild
-  this_can_fail:
-    jobs:
-      - otherBuild
+      - "testing git"
