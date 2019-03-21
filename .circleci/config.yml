@@ -16,7 +16,8 @@ references:
 
 defaults: &defaults
   steps:
-    when:
+    - run: echo $CIRCLE_PULL_REQUEST
+    - when:
       condition: $CIRCLE_PULL_REQUEST
       steps:
         - checkout
@@ -25,7 +26,6 @@ defaults: &defaults
         - run: cp -r  ~/.jsvu/engines/$hostName r
         - run: ls -lsa r/
         - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
-    - run: echo $CIRCLE_PULL_REQUEST
 
 restore_cache: &restore_cache
   restore_cache:
