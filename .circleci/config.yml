@@ -16,7 +16,7 @@ references:
 
 defaults: &defaults
   when:
-    condition: <<$CIRCLE_PULL_REQUEST>>
+    condition: $CIRCLE_PULL_REQUEST
     steps:
       - checkout
       - run: npm install
