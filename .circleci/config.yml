@@ -18,14 +18,14 @@ defaults: &defaults
   steps:
     - run: echo $CIRCLE_PULL_REQUEST
     - when:
-      condition: $CIRCLE_PULL_REQUEST
-      steps:
-        - checkout
-        - run: npm install
-        - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
-        - run: cp -r  ~/.jsvu/engines/$hostName r
-        - run: ls -lsa r/
-        - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
+        condition: <<$CIRCLE_PULL_REQUEST>>
+        steps:
+          - checkout
+          - run: npm install
+          - run: ./node_modules/.bin/jsvu --os=linux64 --engines=$hostName
+          - run: cp -r  ~/.jsvu/engines/$hostName r
+          - run: ls -lsa r/
+          - run: ./node_modules/.bin/test262-harness --hostPath=$hostPath --hostType=$hostType -- 'test/**/*'
 
 restore_cache: &restore_cache
   restore_cache:
